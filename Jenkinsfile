@@ -16,8 +16,8 @@ pipeline {
         stage('git') {
             steps {
                 echo 'pulling from github';
-                git branch : 'master',
-                url : 'https://github.com/Zoubeir20/Kaddem-DEVOPS'
+                git branch : 'main',
+                url : 'https://github.com/B4RB4RO554/DevOpsEvents.git'
             }
         }
 
