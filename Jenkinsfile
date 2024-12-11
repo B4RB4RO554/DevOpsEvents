@@ -1,10 +1,10 @@
 pipeline {
     environment {
 
+        SONARQUBE_ENV = 'SonarQube'
+        SONAR_TOKEN = credentials('SonarToken')
         registry = "B4RB4RO554/DevOpsEvents"
-
         registryCredential = 'dockerhub_id'
-
         dockerImage = ''
 
     }
