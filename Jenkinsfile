@@ -28,6 +28,31 @@ pipeline {
             }
         }
 
+        stage('testing with mockito') {
+            steps {
+                echo 'maven testing';
+                sh "mvn test"
+
+            }
+        }
+
+        stage('SONARQUBE Analysis') {
+             steps {
+                  script {
+                       echo 'Running SonarQube analysis...'
+                       withSonarQubeEnv("${SONARQUBE_ENV}") {
+                            sh """
+                            mvn sonar:sonar \
+                            -Dsonar.login=${SONAR_TOKEN} \
+                            -Dsonar.coverage.jacoco.xmlReportPaths=/target/site/jacoco/jacoco.xml
+                            """
+                       }
+                  }
+             }
+        }
+
+
+
     }
 
 }
