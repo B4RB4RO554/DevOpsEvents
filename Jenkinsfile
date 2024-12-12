@@ -51,16 +51,25 @@ pipeline {
              }
         }
 
-        stage('Deploy to NEXUS') {
+        stage('nexus') {
             steps {
-                script {
-                    echo "Deploying artifact to Nexus..."
-                    withCredentials([usernamePassword(credentialsId: 'NEXUS', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
-                        sh 'mvn -X deploy -DskipTests=true -Dnexus.username=$NEXUS_USER -Dnexus.password=$NEXUS_PASS'
-                    }
-                }
+                echo 'Deploy to nexus';
+                sh 'mvn deploy -D skipTests'
+
             }
         }
+
+//         stage('Deploy to NEXUS') {
+//             steps {
+//                 script {
+//                     echo "Deploying artifact to Nexus..."
+//                     withCredentials([usernamePassword(credentialsId: 'NEXUS', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+//                         sh 'mvn -X deploy -DskipTests=true -Dnexus.username=$NEXUS_USER -Dnexus.password=$NEXUS_PASS'
+//                     }
+//                 }
+//             }
+//         }
+
 
     }
 
