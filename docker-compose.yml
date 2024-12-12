@@ -36,12 +36,22 @@ services:
 
 
   # Prometheus service
+#  prometheus:
+#    image: prom/prometheus:latest
+#    volumes:
+#      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+#    ports:
+#      - "9090:9090" # Prometheus UI accessible on localhost:9090
+
+
+# chat proposition
   prometheus:
     image: prom/prometheus:latest
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - /var/lib/jenkins/workspace/EventsDevOps/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
-      - "9090:9090" # Prometheus UI accessible on localhost:9090
+      - "9090:9090"
+
 
 volumes:
   db:
