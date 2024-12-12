@@ -58,6 +58,17 @@ pipeline {
 
             }
         }
+//         stage('Deploy to NEXUS') {
+//             steps {
+//                 script {
+//                     echo "Deploying artifact to Nexus..."
+//                     withCredentials([usernamePassword(credentialsId: 'NEXUS', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+//                         sh 'mvn -X deploy -DskipTests=true -Dnexus.username=$NEXUS_USER -Dnexus.password=$NEXUS_PASS'
+//                     }
+//                 }
+//             }
+//         }
+
 
         stage('Building our image') {
             steps {
@@ -83,17 +94,11 @@ pipeline {
             }
         }
 
-//         stage('Deploy to NEXUS') {
-//             steps {
-//                 script {
-//                     echo "Deploying artifact to Nexus..."
-//                     withCredentials([usernamePassword(credentialsId: 'NEXUS', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
-//                         sh 'mvn -X deploy -DskipTests=true -Dnexus.username=$NEXUS_USER -Dnexus.password=$NEXUS_PASS'
-//                     }
-//                 }
-//             }
-//         }
-
+        stage('Building and deploying using docker-compose') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
 
     }
 

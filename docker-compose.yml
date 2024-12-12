@@ -34,11 +34,6 @@ services:
         "spring.jpa.hibernate.ddl-auto": "update"
       }'
 
-  # Frontend application service
-  front:
-    image: hayder554/front:15
-    ports:
-      - "86:86"
 
   # Prometheus service
   prometheus:
